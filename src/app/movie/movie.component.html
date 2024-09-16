@@ -1,0 +1,64 @@
+<p>movie works!</p>
+<div class="container">
+    <div [hidden]="submitted">
+       <h1>Movie Form</h1>
+       <form (ngSubmit)="onSubmit()" #movieForm="ngForm">
+       <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" id="name" required [(ngModel)]="model.name" name="name" #name="ngModel">
+    <div [hidden]="name.valid||name.pristine" class="alert alert-danger">
+       Movie Name is required
+    </div>
+       </div>
+
+   
+       <div class="form-group">
+        <label for="genre">Movie genre</label>
+        <input type="text" class="form-control" id="genre"
+               [(ngModel)]="model.genre" name="genre">
+      </div>
+
+      <div class="form-group">
+        <label for="power">Star Actor</label>
+        <select class="form-control" id="power"
+                required
+                [(ngModel)]="model.power" name="power"
+                #power="ngModel">
+          <option *ngFor="let pow of powers" [value]="pow">{{pow}}</option>
+        </select>
+        <div [hidden]="power.valid || power.pristine" class="alert alert-danger">
+          Power is  required
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-success" [disabled]="!movieForm.form.valid">Submit</button>
+      <button type="button" class="btn btn-default" (click)="newMovie(); movieForm.reset()">New Movie</button>
+    </form>
+  </div>
+
+
+  <div [hidden]="!submitted">
+    <h2>You submitted the following:</h2>
+    <div class="row">
+      <div class="col-xs-3">Name</div>
+      <div class="col-xs-9">{{ model.name }}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">Movie Genre</div>
+      <div class="col-xs-9">{{ model.genre }}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">Power</div>
+      <div class="col-xs-9">{{ model.power }}</div>
+    </div>
+    <br>
+    <button type="button" class="btn btn-primary" (click)="submitted=false">Edit</button>
+
+
+
+
+
+
+
+    </div>
+</div>
